@@ -7,6 +7,12 @@ services:
     environment:
       REDIS_URL: redis
     ports:
-    - 8000:8000
+    - "127.0.0.1:8000:8000"
   redis:
     image: redis:6
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - "redisdata:/data"
+
+volumes:
+  redisdata:
