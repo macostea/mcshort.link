@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shorty McShort Link</title>
+</head>
+<body>
+    <form method="post" action="{{ url_for('shorten') }} ">
+        <label for="path">Link</label>
+        <input name="path" id="path" required />
+        <input type="submit" value="Shorten!" />
+    </form>
+
+{% if short_path %}
+    <h1>Your shortened URL is:</h1>
+    {{ short_path }}
+{% endif %}
+</body>
+</html>
