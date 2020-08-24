@@ -34,7 +34,7 @@ def shorten():
         expiry = "30d"
     if validators.url(path):
         short_path = __set_path(path, expiry_human[expiry])
-        short_path_full_url = f"{request.url_root}{short_path}"
+        short_path_full_url = f"{request.url_root}{short_path}".replace("http", "https")  # Shitty hack but should work
         return render_template("index.html", short_path=short_path_full_url)
 
     abort(400)
