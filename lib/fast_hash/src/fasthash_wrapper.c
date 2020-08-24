@@ -10,7 +10,7 @@ static PyObject *fasthash32_py(PyObject *self, PyObject *args) {
 
   uint32_t result = fasthash32(data, strlen(data), 0);
 
-  return PyLong_FromLong(result);
+  return PyLong_FromUnsignedLongLong(result);
 }
 
 static PyObject *fasthash64_py(PyObject *self, PyObject *args) {
@@ -22,7 +22,7 @@ static PyObject *fasthash64_py(PyObject *self, PyObject *args) {
 
   uint64_t result = fasthash64(data, strlen(data), 0);
 
-  return PyLong_FromUnsignedLong(result);
+  return PyLong_FromUnsignedLongLong(result);
 }
 
 static PyMethodDef module_methods[] = {
