@@ -1,0 +1,12 @@
+version: "3"
+services:
+  mcshort:
+    build: .
+    depends_on:
+      - redis
+    environment:
+      REDIS_URL: redis
+    ports:
+    - 8000:8000
+  redis:
+    image: redis:6
