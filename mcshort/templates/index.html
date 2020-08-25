@@ -3,17 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Shorty McShort Link</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/default.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}" />
+
+    <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
 </head>
 <body>
-    <form method="post" action="{{ url_for('shorten') }} ">
-        <label for="path">Link</label>
-        <input name="path" id="path" required />
-        <input type="submit" value="Shorten!" />
-    </form>
+<div class="wrapper">
+    <div class="page">
+        <div class="main">
+            <div class="logo-wrapper">
+                <h1><a href="{{ url_for('index') }}">McShort Link</a></h1>
+            </div>
+
+            <div class="shortner-wrapper">
+                <form id="shortner-form" method="post" action="{{ url_for('shorten') }} ">
+                    <input name="path" id="path" placeholder="Enter your link (e.g. https://www.mozilla.org)" />
+                    <button id="submit" type="submit" value="Shorten!"><i class="fas fa-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
 
 {% if short_path %}
-    <h1>Your shortened URL is:</h1>
-    {{ short_path }}
+        <div class="result">
+            <h1 class="result-title">
+                Your shortened URL is:
+            </h1>
+            <p class="result-content"><a id="shortened-url" href="{{ short_path }}">{{ short_path }}</a> <button id="clipboard" data-clipboard-target="#shortened-url"><i class="far fa-copy"></i></button></p>
+        </div>
 {% endif %}
+    </div>
+    <footer class="footer">
+        <div class="footer-container">
+            <p>This here is an Open Source Project</p>
+            <p><a href="https://github.com/macostea/mcshort.link"><i class="fab fa-github"></i></a></p>
+        </div>
+    </footer>
+</div>
+
 </body>
+    <script language="JavaScript">
+        new ClipboardJS('#clipboard');
+    </script>
 </html>
