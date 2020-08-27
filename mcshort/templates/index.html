@@ -5,7 +5,28 @@
     <title>Shorty McShort Link</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/default.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon/favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/favicon/apple-touch-icon.png') }}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img/favicon/favicon-32x32.png') }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img/favicon/favicon-16x16.png') }}" />
+    <link rel="manifest" href="{{ url_for('static', filename='img/favicon/site.webmanifest') }}" />
 
+    <meta name="description" content="The simplest way to shorten your links. Open Source and no nonsense.">
+    <meta itemprop="name" content="Shorty McShort Link">
+    <meta itemprop="description" content="The simplest way to shorten your links. Open Source and no nonsense.">
+    <meta itemprop="image" content="{{ url_for('static', filename='img/favicon/android-chrome-512x512.png') }}">
+
+    <meta property="og:url" content="https://mcshort.link">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Shorty McShort Link">
+    <meta property="og:description" content="The simplest way to shorten your links. Open Source and no nonsense.">
+    <meta property="og:image" content="{{ url_for('static', filename='img/favicon/android-chrome-512x512.png') }}">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Shorty McShort Link">
+    <meta name="twitter:description" content="The simplest way to shorten your links. Open Source and no nonsense.">
+    <meta name="twitter:image" content="{{ url_for('static', filename='img/favicon/android-chrome-512x512.png') }}">
+    
     <script src="{{ url_for('static', filename='js/clipboard.min.js') }}"></script>
 </head>
 <body>
@@ -13,7 +34,8 @@
     <div class="page">
         <div class="main">
             <div class="logo-wrapper">
-                <h1><a href="{{ url_for('index') }}">McShort Link</a></h1>
+                <img id="logo" src="{{ url_for('static', filename='img/logo.svg') }}" />
+                <h1 id="logo-text"><a href="{{ url_for('index') }}">McShort Link</a></h1>
             </div>
 
             <div class="shortner-wrapper">
@@ -33,13 +55,15 @@
         </div>
 {% endif %}
     </div>
-    <footer class="footer">
-        <div class="footer-container">
-            <p>This here is an Open Source Project</p>
-            <p><a href="https://github.com/macostea/mcshort.link"><i class="fab fa-github"></i></a></p>
-        </div>
-    </footer>
 </div>
+
+<footer class="footer">
+    <div class="footer-container">
+        <p>This here is an Open Source Project</p>
+        <p><a href="https://github.com/macostea/mcshort.link"><i class="fab fa-github"></i></a></p>
+    </div>
+</footer>
+
 
 </body>
     <script language="JavaScript">
