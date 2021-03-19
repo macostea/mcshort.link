@@ -7,10 +7,9 @@ from .encoder import encode_string
 
 app = Flask(__name__)
 
-redis_url = os.environ.get('REDIS_URL', '127.0.0.1')
-redis_port = os.environ.get('REDIS_PORT', 6379)
+redis_url = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/0')
 
-r = redis.Redis(host=redis_url, port=int(redis_port), decode_responses=True)
+r = redis.Redis.from_url(redis_url, decode_responses=True)
 
 day = 60 * 60 * 24
 

@@ -28,8 +28,7 @@ $ pip install -r requirements.txt
 * Export the env vars for your redis instance
 ```shell script
 # Replace these with your values
-$ export REDIS_URL=127.0.0.1
-$ export REDIS_PORT=6379
+$ export REDIS_URL='redis://127.0.0.1:6379/0'
 ```
 
 * Run the application

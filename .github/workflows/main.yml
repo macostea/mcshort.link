@@ -46,3 +46,16 @@ jobs:
           tags: |
             mcostea/mcshortlink:latest
             mcostea/mcshortlink:${{ github.run_number }}
+
+      - name: Login to Heroku Container registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+
+      - name: Deploy to heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          run: |
+            docker tag mcostea/mcshortlink:latest registry.heroku.com/mcshortlink/web
+            docker push registry.heroku.com/mcshortlink/web
+            heroku container:release web
