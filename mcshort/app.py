@@ -1,4 +1,5 @@
 from flask import Flask, redirect, abort, request, render_template, jsonify
+from flask_cors import CORS
 import os
 import redis
 import validators
@@ -6,6 +7,7 @@ import validators
 from .encoder import encode_string
 
 app = Flask(__name__)
+CORS(app)
 
 redis_url = os.environ.get('REDIS_URL', 'redis://127.0.0.1:6379/0')
 
