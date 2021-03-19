@@ -59,4 +59,4 @@ jobs:
           docker pull mcostea/mcshortlink:latest
           docker tag mcostea/mcshortlink:latest registry.heroku.com/mcshortlink/web
           docker push registry.heroku.com/mcshortlink/web
-          heroku -a mcshortlink container:release web
+          heroku container:release web -a mcshortlink
