@@ -1,0 +1,7 @@
+name = "rustwasm"
+type = "rust"
+
+account_id = "cc9551da1de1b07834198a21b965d463"
+workers_dev = true
+route = ""
+zone_id = ""
