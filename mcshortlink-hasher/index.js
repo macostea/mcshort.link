@@ -74,7 +74,7 @@ async function handleRequest(event) {
   let request = event.request
 
   let url = new URL(request.url)
-  if (request.method.toUpperCase() !== "POST" && url.pathname === "/api/shorten") {
+  if (request.method.toUpperCase() === "POST" && url.pathname === "/api/shorten") {
     const body = await request.json()
     const path = body.path
 
@@ -92,6 +92,8 @@ async function handleRequest(event) {
     const longUrl = await getKV(url.pathname.substr(1))
     if (longUrl) {
       return Response.redirect(longUrl, 302)
+    } else {
+      return new Response("Key not found " + url.pathname.substr(1))
     }
   }
 }
