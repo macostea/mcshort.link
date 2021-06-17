@@ -52,7 +52,7 @@ async function shorten(path) {
   let hasher = await emscripten_module
 
   let encoder = new TextEncoder()
-  let bytes = encoder.encode("asdaglkjaslkgjas")
+  let bytes = encoder.encode(path)
 
   let ptr = hasher.init(bytes.length)
 
