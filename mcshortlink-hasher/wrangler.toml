@@ -1,0 +1,10 @@
+name = "mcshortlink-hasher"
+type = "webpack"
+zone_id = ""
+account_id = "cc9551da1de1b07834198a21b965d463"
+route = ""
+workers_dev = true
+webpack_config = "webpack.config.js"
+kv_namespaces = [
+    { binding = "MCSHORT_LINK_KV", id = "14d4c6d7cc734c319c8deddc6b1e5dbb" }
+]
