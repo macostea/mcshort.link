@@ -23,7 +23,6 @@ typedef unsigned int uint;
             (h) ^= (h) >> 47; })
 
 char *buffer;
-char *outBuffer;
 
 // init() is called from JS to allocate space for the string.
 char* EMSCRIPTEN_KEEPALIVE init(size_t size) {
@@ -68,19 +67,3 @@ uint64_t EMSCRIPTEN_KEEPALIVE fasthash64(size_t len, uint64_t seed) {
 
     return mix(h);
 }
-
-//uint64_t EMSCRIPTEN_KEEPALIVE encode(size_t len, uint64_t seed) {
-//    uint64_t h = fasthash64(len, seed);
-//    const std::string BASE66_ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_.";
-//    const size_t BASE = BASE66_ALPHABET.length();
-//
-//    std::string ret = "";
-//
-//    if (h == 0) {
-//        ret += BASE66_ALPHABET[0];
-//    } else {
-//        while (h != 0) {
-//            h = h / BASE;
-//        }
-//    }
-//}
