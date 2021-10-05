@@ -1,11 +1,7 @@
 <script setup>
-    const props = defineProps({
+    defineProps({
         shortPath: String
     })
-
-    function log() {
-        console.log(props.shortPath)
-    }
 </script>
 
 <template>
@@ -13,9 +9,13 @@
         <h1 class="result-title">
             Your shortened URL is:
         </h1>
-        <p class="result-content"><a id="shortened-url" href="{{ shortPath }}">{{ shortPath }}</a> <button id="clipboard" data-clipboard-target="#shortened-url"><i class="far fa-copy"></i></button></p>
+        <p class="result-content"><a id="shortened-url" v-bind:href="shortPath">{{ shortPath }}</a> <button id="clipboard" data-clipboard-target="#shortened-url"><i class="far fa-copy"></i></button></p>
     </div>
 </template>
+
+<script>
+new ClipboardJS('#clipboard');
+</script>
 
 <style>
 .result {

@@ -11,9 +11,12 @@ import { ref } from 'vue'
             path: longPath.value
         }
 
-        let shortenedPath = await fetch("/api/shorten", {
+        const url = import.meta.env.DEV ? "https://mcshort.link/api/shorten" : "/api/shorten"
+        const cors = import.meta.env.DEV ? 'cors' : 'same-origin'
+
+        let shortenedPath = await fetch(url, {
             method: 'POST',
-            mode: 'cors',
+            mode: cors,
             headers: {
                 'Content-Type': 'application/json'
             },
