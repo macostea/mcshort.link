@@ -25,6 +25,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <emscripten.h>
 
 // Basic types and decls.
@@ -47,6 +48,8 @@ typedef unsigned int uint;
             (h) *= 0x2127599bf4325c37ULL;	\
             (h) ^= (h) >> 47; })
 
+const char *BASE66_ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_.";
+
 char *buffer;
 
 // init() is called from JS to allocate space for the string.
@@ -58,9 +61,27 @@ char* EMSCRIPTEN_KEEPALIVE init(size_t size) {
   return buffer;
 }
 
-// resize() is called from JS once the image file has been copied into
-// WASM memory. It resizes the image to be target_width pixels wide.
-uint64_t EMSCRIPTEN_KEEPALIVE fasthash64(size_t len, uint64_t seed) {
+void encode_int(uint64_t n, char **result) {
+    if (n == 0) {
+        *result[0] = BASE66_ALPHABET[0];
+        return;
+    }
+    
+    const uint64_t BASE = strlen(BASE66_ALPHABET);
+    
+    size_t i = 0;
+    
+    while (n) {
+        uint64_t t = n % BASE;
+        n = n / BASE;
+        (*result)[i] = BASE66_ALPHABET[t];
+        i++;
+    }
+    
+    (*result)[i] = '\0';
+}
+
+size_t EMSCRIPTEN_KEEPALIVE fasthash64(size_t len, uint64_t seed) {
     char *buf = buffer;
     const uint64_t    m = 0x880355f21e6d1965ULL;
     const uint64_t *pos = (const uint64_t *)buf;
@@ -90,5 +111,10 @@ uint64_t EMSCRIPTEN_KEEPALIVE fasthash64(size_t len, uint64_t seed) {
         h *= m;
     }
 
-    return mix(h);
+    uint64_t hash = mix(h);
+
+    // HACK: Write to the original buffer string so we don't pass 2 pointers to JS
+    encode_int(hash, &buffer);
+
+    return strlen(buffer);
 }

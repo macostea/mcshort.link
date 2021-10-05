@@ -23,30 +23,11 @@ let emscripten_module = new Promise((resolve, reject) => {
   }).then(module => {
     resolve({
       init: module.cwrap('init', 'number', ['number']),
-      fasthash64: module.cwrap('fasthash64', 'bigint', ['number', 'bigint']),
+      fasthash64: module.cwrap('fasthash64', 'number', ['number', 'number']),
       module: module,
     })
   })
 })
-
-const BASE66_ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_."
-const BASE = BigInt(BASE66_ALPHABET.length)
-
-function encode_int(n) {
-  if (n === 0) {
-    return BASE66_ALPHABET[0]
-  }
-
-  let r = ""
-
-  while (n) {
-    n = n / BASE
-    let t = n % BASE
-    r += BASE66_ALPHABET[t]
-  }
-
-  return r
-}
 
 async function shorten(path) {
   let hasher = await emscripten_module
@@ -58,8 +39,12 @@ async function shorten(path) {
 
   hasher.module.HEAPU8.set(bytes, ptr)
 
-  const hashValue = hasher.fasthash64(bytes.length, BigInt(4))
-  return encode_int(hashValue)
+  const newSize = hasher.fasthash64(bytes.length, 4)
+  let resultBytes = hasher.module.HEAPU8.slice(ptr, ptr + newSize)
+  
+  let decoder = new TextDecoder()
+
+  return decoder.decode(resultBytes);
 }
 
 async function setKV(shortPath, longPath) {
