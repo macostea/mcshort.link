@@ -7,8 +7,23 @@ import { ref } from 'vue'
     ])
 
     async function getShortPath() {
-        console.log(longPath.value)
-        emit('shortenedPath', longPath.value)
+        let postData = {
+            path: longPath.value
+        }
+
+        let shortenedPath = await fetch("/api/shorten", {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        })
+
+        let response = await shortenedPath.json()
+
+        console.log(response.short_path)
+        emit('shortenedPath', response.short_path)
     }
 </script>
 

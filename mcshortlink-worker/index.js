@@ -74,6 +74,7 @@ async function handleRequest(event) {
   let request = event.request
 
   let url = new URL(request.url)
+  let pathsubstr = url.pathname.substr(1)
   if (request.method.toUpperCase() === "POST" && url.pathname === "/api/shorten") {
     const body = await request.json()
     const path = body.path
@@ -88,12 +89,15 @@ async function handleRequest(event) {
     }), {
       headers: { "content-type": "application/json;charset=UTF-8" }
     })
+  } else if (request.method.toUpperCase() === "GET" && !pathsubstr) {
+    const response = await fetch(request)
+    return response
   } else {
-    const longUrl = await getKV(url.pathname.substr(1))
+    const longUrl = await getKV(pathsubstr)
     if (longUrl) {
       return Response.redirect(longUrl, 302)
     } else {
-      return new Response("Key not found " + url.pathname.substr(1))
+      return new Response("Key not found " + pathsubstr)
     }
   }
 }
