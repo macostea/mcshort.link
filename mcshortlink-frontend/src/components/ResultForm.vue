@@ -24,13 +24,13 @@ new ClipboardJS('#clipboard');
     justify-content: center;
     text-align: center;
     margin: 30px auto 48px;
-    background-color: #f1faee;
+    background-color: #272727;
     padding-bottom: 2px;
     padding-top: 2px;
 }
 
 .result a {
-    color: #e63946;
+    color: #ec005e;
 }
 
 .result-title {
@@ -39,13 +39,13 @@ new ClipboardJS('#clipboard');
     text-align: center;
     padding-bottom: 5px;
     font-weight: 800;
-    color: #1d3557;
+    color: #fff;
 }
 
 #clipboard {
     border: none;
     background-color: transparent;
     cursor: pointer;
-    color: #1d3557;
+    color: #fff;
 }
 </style>

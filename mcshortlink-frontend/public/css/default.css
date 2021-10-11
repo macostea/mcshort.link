@@ -1,5 +1,5 @@
 body {
-    background-color: #1d3557;
+    background-color: #171717;
     font-family: sans-serif;
     margin: 8px 0 0 0;
 }
@@ -7,7 +7,7 @@ body {
 a {
     font-family: inherit;
     text-decoration: none;
-    color: #f1faee;
+    color: #fff;
 }
 
 .wrapper {
@@ -41,16 +41,21 @@ a {
 }
 
 footer {
-    background-color: #f1faee;
+    background-color: #272727;
     position: fixed;
     bottom: 0;
     width: 100%;
-    margin: 12px auto 0;
+    margin: 0 auto 0;
     padding: 32px 12px 12px 12px;
     text-align: center;
-    color: #1d3557;
+    color: #fff;
+    right: 0;
 }
 
 footer a {
-    color: #1d3557;
+    color: #fff;
+}
+
+footer a:hover {
+    color: #ec005e;
 }

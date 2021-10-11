@@ -56,8 +56,8 @@ import { ref } from 'vue'
     flex: 1 0 auto;
     max-width: 665px;
     margin: 0 auto;
-    background-color: #457b9d;
-    border-color: #457b9d;
+    background-color: #272727;
+    border-color: #272727;
     box-shadow: 0 1px 3px rgba(0,0,0,0.5);
     font-size: 1.14em;
     padding-right: 3.5em;
@@ -70,7 +70,7 @@ import { ref } from 'vue'
 }
 
 #path {
-    color: #a8dadc;
+    color: #fff;
     font-size: 1.1em;
     font-weight: normal;
     display: block;
@@ -88,7 +88,7 @@ import { ref } from 'vue'
 #submit {
     border-radius: 0 4px 4px 0;
     min-width: 26px;
-    color: #a8dadc;
+    color: #fff;
     font-size: 1.25em;
     padding: 0 .64em;
     height: auto;
