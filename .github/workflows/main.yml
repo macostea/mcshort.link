@@ -37,4 +37,4 @@ jobs:
 
       - name: Build frontend 
         run: |
-          cd mcshortlink-frontend && npm i && vite build
+          cd mcshortlink-frontend && npm i && npx vite build
