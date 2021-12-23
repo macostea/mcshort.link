@@ -1,5 +1,4 @@
 # Shorty McShort Link
-
 This is a basic URL shortener. It does nothing more, nothing less.
 
 ## Requirements
