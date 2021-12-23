@@ -1,54 +1,45 @@
-body {
-    background-color: #1d3557;
-    font-family: sans-serif;
-    margin: 8px 0 0 0;
-}
+<script setup>
+import { ref } from 'vue'
+    let longPath = ref('')
 
-a {
-    font-family: inherit;
-    text-decoration: none;
-    color: #f1faee;
-}
+    const emit = defineEmits([
+        'shortenedPath'
+    ])
 
-.wrapper {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-}
+    async function getShortPath() {
+        let postData = {
+            path: longPath.value
+        }
 
-.page {
-    margin: auto;
-    margin-bottom: auto;
-    width: 100%;
-    top: 24%;
-    left: 0;
-    right: 0;
-}
+        const url = import.meta.env.DEV ? "https://mcshort.link/api/shorten" : "/api/shorten"
+        const cors = import.meta.env.DEV ? 'cors' : 'same-origin'
 
-.main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 150px auto 0;
-    padding: 0 7px;
-    max-width: 1270px;
-}
+        let shortenedPath = await fetch(url, {
+            method: 'POST',
+            mode: cors,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        })
 
-.logo-wrapper {
-    display: flex;
-    align-items: center;
-    flex: 1 0 auto;
-}
+        let response = await shortenedPath.json()
 
-#logo {
-    width: 78px;
-    height: 78px;
-}
+        console.log(response.short_path)
+        emit('shortenedPath', response.short_path)
+    }
+</script>
 
-#logo-text {
-    width: 135px;
-}
+<template>
+    <div class="shortner-wrapper">
+        <form id="shortner-form" @submit.prevent="getShortPath">
+            <input name="path" id="path" placeholder="Enter your link (e.g. https://www.mozilla.org)" v-model="longPath" />
+            <button id="submit" type="submit" value="Shorten!"><i class="fas fa-arrow-right"></i></button>
+        </form>
+    </div>
+</template>
 
+<style>
 .shortner-wrapper {
     padding: 0;
     margin: 0;
@@ -65,8 +56,8 @@ a {
     flex: 1 0 auto;
     max-width: 665px;
     margin: 0 auto;
-    background-color: #457b9d;
-    border-color: #457b9d;
+    background-color: #272727;
+    border-color: #272727;
     box-shadow: 0 1px 3px rgba(0,0,0,0.5);
     font-size: 1.14em;
     padding-right: 3.5em;
@@ -79,7 +70,7 @@ a {
 }
 
 #path {
-    color: #a8dadc;
+    color: #fff;
     font-size: 1.1em;
     font-weight: normal;
     display: block;
@@ -97,7 +88,7 @@ a {
 #submit {
     border-radius: 0 4px 4px 0;
     min-width: 26px;
-    color: #a8dadc;
+    color: #fff;
     font-size: 1.25em;
     padding: 0 .64em;
     height: auto;
@@ -130,49 +121,4 @@ a {
     z-index: 2;
     outline: none;
 }
-
-.result {
-    min-height: auto;
-    align-items: start;
-    justify-content: center;
-    text-align: center;
-    margin: 30px auto 48px;
-    background-color: #f1faee;
-    padding-bottom: 2px;
-    padding-top: 2px;
-}
-
-.result a {
-    color: #e63946;
-}
-
-.result-title {
-    font-size: 32px;
-    line-height: 44px;
-    text-align: center;
-    padding-bottom: 5px;
-    font-weight: 800;
-    color: #1d3557;
-}
-
-#clipboard {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    color: #1d3557;
-}
-
-footer {
-    background-color: #f1faee;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    margin: 12px auto 0;
-    padding: 32px 12px 12px 12px;
-    text-align: center;
-    color: #1d3557;
-}
-
-footer a {
-    color: #1d3557;
-}
+</style>
