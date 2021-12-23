@@ -59,7 +59,7 @@ async function handleRequest(event) {
   let request = event.request
 
   let url = new URL(request.url)
-  let pathsubstr = url.pathname.substr(1)
+  let pathsubstr = url.pathname.substring(1)
   if (request.method.toUpperCase() === "POST" && url.pathname === "/api/shorten") {
     const body = await request.json()
     const path = body.path
