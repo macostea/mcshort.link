@@ -9,8 +9,8 @@ module.exports = {
   target: 'webworker',
   plugins: [
     {
-      apply: compiler => {
-        compiler.hooks.compilation.tap('emscripten-build', compilation => {
+      apply: (compiler) => {
+        compiler.hooks.compilation.tap('emscripten-build', (compilation) => {
           let result = spawn('node', ['build.js'], { stdio: 'inherit' })
 
           if (result.status != 0) {
