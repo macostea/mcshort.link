@@ -34,7 +34,7 @@ jobs:
         run: |
           cd mcshortlink-worker
           node build.js
-          npx wrangler build
+          npx wrangler deploy --dry-run --outdir=dist
 
       - name: Build frontend 
         run: |
