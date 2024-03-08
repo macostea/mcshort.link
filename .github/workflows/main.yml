@@ -32,7 +32,9 @@ jobs:
 
       - name: Build worker
         run: |
-          cd mcshortlink-worker && npx wrangler build
+          cd mcshortlink-worker
+          node build.js
+          npx wrangler build
 
       - name: Build frontend 
         run: |
