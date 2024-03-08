@@ -27,8 +27,8 @@ jobs:
       
       - name: Install dependencies
         run: |
-          cd mcshortlink-worker && npm ci
-          cd mcshortlink-frontend && npm ci
+          cd $GITHUB_WORKSPACE/mcshortlink-worker && npm ci
+          cd $GITHUB_WORKSPACE/mcshortlink-frontend && npm ci
 
       - name: Build worker
         run: |
